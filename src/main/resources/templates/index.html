@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Member List</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>名前</th>
+				<th>年齢</th>
+				<th>住所</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="member : ${members}" th:object="${member}">
+				<td th:text="*{id}"></td>
+				<td th:text="*{name}"></td>
+				<td th:text="*{age}"></td>
+				<td th:text="*{address}"></td>
+				<td><a th:href="@{/member/{id}/edit(id=*{id})}">編集</a></td>
+				<td>
+					<form th:action="@{/member/{id}(id=*{id})}" th:method="post">
+						<input type="submit" value="削除" />
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="/member/new">新規作成</a>
+
+</body>
+</html>
